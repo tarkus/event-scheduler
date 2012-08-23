@@ -1,0 +1,7 @@
+--require should
+--reporter spec
+--compilers coffee:coffee-script
+--timeout 20000
+--slow 10000
+--ui bdd
+--watch

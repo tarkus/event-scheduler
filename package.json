@@ -1,0 +1,32 @@
+{
+  "name": "event-planner",
+  "version": "0.1.0",
+  "description": "An event emitter wrapper, nested callback remover",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tarkus/event-planner.git"
+  },
+  "dependencies": {
+  
+  },
+  "devDependencies": {
+    "coffee-script": "*",
+    "should": "*",
+    "mocha": "*"
+  },
+  "keywords": [
+    "event",
+    "emitter",
+    "event",
+    "callback"
+  ],
+  "author": "Tarkus Liu <tarkus.nnkh@gmail.com>",
+  "license": "BSD"
+}
