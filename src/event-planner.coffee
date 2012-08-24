@@ -1,14 +1,17 @@
 {EventEmitter} = require 'events'
 
+_planners = []
+
 class EventPlanner extends EventEmitter
 
-
   constructor: (@namespace) ->
+    _planners.push @
+    @_idx = _planners.indexOf @
     @namespace ?= @constructor.toString().match(/function\s*(\w+)/)[1]
     super
 
   _addNamespace: (name) ->
-    [@namespace, name].join '::'
+    [@_idx, @namespace, name].join '::'
 
   addListener: (event, listener) ->
     event = @_addNamespace event
