@@ -1,55 +1,55 @@
 should = require 'should'
-EventPlanner = require '../lib/event-planner'
+EventScheduler = require '../lib/event-scheduler'
 
 
-plannerStateHolder = 'not set'
+schedulerStateHolder = 'not set'
 
-planner = new EventPlanner
-planner.on 'start', -> plannerStateHolder = 'started'
-planner.on 'end', -> plannerStateHolder = 'ended'
+scheduler = new EventScheduler
+scheduler.on 'start', -> schedulerStateHolder = 'started'
+scheduler.on 'end', -> schedulerStateHolder = 'ended'
 
 
-class MoreSeriousPlanner extends EventPlanner
+class MoreSeriousScheduler extends EventScheduler
 
   stateHolder: 'not set'
 
-seriousPlanner = new MoreSeriousPlanner
-seriousPlanner.on 'start to play', -> @stateHolder = 'started'
-seriousPlanner.on 'after a long time', -> @stateHolder = 'ended'
+seriousScheduler = new MoreSeriousScheduler
+seriousScheduler.on 'start to play', -> @stateHolder = 'started'
+seriousScheduler.on 'after a long time', -> @stateHolder = 'ended'
 
-anotherSeriousPlanner = new MoreSeriousPlanner
-anotherSeriousPlanner.on 'start to play', (done) ->
-  seriousPlanner.stateHolder.should.eql 'started'
+anotherSeriousScheduler = new MoreSeriousScheduler
+anotherSeriousScheduler.on 'start to play', (done) ->
+  seriousScheduler.stateHolder.should.eql 'started'
   @stateHolder.should.eql 'not set'
   @stateHolder = 'started'
 
 describe 'planned event', ->
 
-  it 'should be triggered from EventPlanner instance', (done) ->
-    plannerStateHolder.should.eql 'not set'
-    planner.emit 'start'
-    plannerStateHolder.should.eql 'started'
-    planner.namespace.should.eql 'EventPlanner'
+  it 'should be triggered from EventScheduler instance', (done) ->
+    schedulerStateHolder.should.eql 'not set'
+    scheduler.emit 'start'
+    schedulerStateHolder.should.eql 'started'
+    scheduler.namespace.should.eql 'EventScheduler'
 
     setTimeout ->
-      planner.emit 'end'
+      scheduler.emit 'end'
     , 1000
 
     setTimeout ->
-      plannerStateHolder.should.eql 'ended'
+      schedulerStateHolder.should.eql 'ended'
       done()
     , 1200
 
   it 'should be triggered from subclass instance of EventEmitter', (done) ->
-    seriousPlanner.emit 'start to play'
-    anotherSeriousPlanner.emit 'start to play'
+    seriousScheduler.emit 'start to play'
+    anotherSeriousScheduler.emit 'start to play'
 
     setTimeout ->
-      seriousPlanner.emit 'after a long time'
+      seriousScheduler.emit 'after a long time'
     , 2000
 
     setTimeout ->
-      seriousPlanner.stateHolder.should.eql 'ended'
+      seriousScheduler.stateHolder.should.eql 'ended'
       done()
     , 2200
 

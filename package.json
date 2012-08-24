@@ -1,5 +1,5 @@
 {
-  "name": "event-planner",
+  "name": "event-scheduler",
   "version": "0.1.0",
   "description": "An event emitter wrapper, nested callback remover",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tarkus/event-planner.git"
+    "url": "git://github.com/tarkus/event-scheduler.git"
   },
   "dependencies": {
   

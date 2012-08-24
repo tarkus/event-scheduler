@@ -1,12 +1,12 @@
 {EventEmitter} = require 'events'
 
-_planners = []
+_schedulers = []
 
-class EventPlanner extends EventEmitter
+class EventScheduler extends EventEmitter
 
   constructor: (@namespace) ->
-    _planners.push @
-    @_idx = _planners.indexOf @
+    _schedulers.push @
+    @_idx = _schedulers.indexOf @
     @namespace ?= @constructor.toString().match(/function\s*(\w+)/)[1]
     super
 
@@ -40,6 +40,6 @@ class EventPlanner extends EventEmitter
 
   emit: () ->
     arguments[0] = @_addNamespace arguments[0]
-    EventPlanner.__super__.emit.apply(@, arguments)
+    EventScheduler.__super__.emit.apply(@, arguments)
 
-module.exports = EventPlanner
+module.exports = EventScheduler
