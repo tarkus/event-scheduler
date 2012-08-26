@@ -1,1 +1,1 @@
-module.exports = require('lib/event-scheduler');
+module.exports = require('./lib/event-scheduler');
